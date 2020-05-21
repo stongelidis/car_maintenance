@@ -178,6 +178,67 @@ def post_services():
 
         abort(422)
 
+# -----------------------------------------------------------------------------
+# patch car or service entry
+# -----------------------------------------------------------------------------
+
+
+@app.route('/cars/<int:id>', methods=['PATCH'])
+def patch_car(id):
+
+    try:
+
+        car = Car.query.filter(Car.id == id).one_or_none()
+
+        body = request.get_json()
+
+        car_make = body.get('make')
+        car_model = body.get('model')
+        car_year = body.get('year')
+
+        car.make = car_make
+        car.model = car_model
+        car.year = car_year
+
+        car.update()
+
+        return jsonify({
+            'success': True,
+            'car': car.format()
+        })
+
+    except BaseException:
+        abort(404)
+
+
+@app.route('/services/<int:id>', methods=['PATCH'])
+def patch_service(id):
+    try:
+
+        service = Service.query.filter(Service.id == id).one_or_none()
+
+        body = request.get_json()
+
+        service_date = body.get('date')
+        service_mileage = body.get('mileage')
+        service_notes = body.get('service_notes')
+        car_id = body.get('car_id')
+
+        service.date = service_date
+        service.mileage = service_mileage
+        service.notes = service_notes
+        service.car_id = car_id
+
+        service.update()
+
+        return jsonify({
+            'success': True,
+            'service': service.format()
+        })
+
+    except BaseException:
+        abort(404)
+
 
 # -----------------------------------------------------------------------------
 
