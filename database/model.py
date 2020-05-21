@@ -1,5 +1,5 @@
 import os
-from sqlalchemy import Column, String, Integer, DateTime
+from sqlalchemy import Column, String, Integer, Date
 from flask_sqlalchemy import SQLAlchemy
 import json
 
@@ -19,14 +19,27 @@ class Car(db.Model):
     __tablename__ = 'Car'
 
     # auto-increments, unique primary key
-    id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
+    id = Column(Integer, primary_key=True)
 
     # define car attributes
     make = Column(String(80), nullable=False)
     model = Column(String(80), nullable=False)
     year = Column(Integer, nullable=False)
 
-    def short(self):
+    services = db.relationship("Service", backref='car')
+
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def format(self):
 
         return {
             'id': self.id,
@@ -36,31 +49,43 @@ class Car(db.Model):
         }
 
     def __repr__(self):
-        return json.dumps(self.short())
+        return json.dumps(self.format())
 
 
 class Service(db.Model):
     __tablename__ = 'Service'
 
     # auto-increments, unique primary key
-    id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
+    id = Column(Integer, primary_key=True)
 
     # define service attributes
-    date = Column(DateTime, nullable=False)
+    date = Column(Date, nullable=False)
     mileage = Column(Integer, nullable=False)
     notes = Column(String, nullable=False)
 
-    cars = db.relationship("Car", backref='service')
+    car_id = db.Column(db.Integer, db.ForeignKey('Car.id'), nullable=False)
 
-    def short(self):
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def format(self):
+
         return {
             'id': self.id,
             'date': self.date,
             'mileage': self.mileage,
-            'make': self.cars.make,
-            'model': self.cars.model,
+            'make': self.car.make,
+            'model': self.car.model,
             'notes': self.notes
         }
 
     def __repr__(self):
-        return json.dumps(self.short())
+        return json.dumps(self.format())
