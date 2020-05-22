@@ -16,7 +16,7 @@ def setup_db(app):
 
 
 class Car(db.Model):
-    __tablename__ = 'Car'
+    __tablename__ = 'cars'
 
     # auto-increments, unique primary key
     id = Column(Integer, primary_key=True)
@@ -53,7 +53,7 @@ class Car(db.Model):
 
 
 class Service(db.Model):
-    __tablename__ = 'Service'
+    __tablename__ = 'services'
 
     # auto-increments, unique primary key
     id = Column(Integer, primary_key=True)
@@ -63,7 +63,7 @@ class Service(db.Model):
     mileage = Column(Integer, nullable=False)
     notes = Column(String, nullable=False)
 
-    car_id = db.Column(db.Integer, db.ForeignKey('Car.id'), nullable=False)
+    car_id = db.Column(db.Integer, db.ForeignKey('cars.id'), nullable=False)
 
     def insert(self):
         db.session.add(self)
