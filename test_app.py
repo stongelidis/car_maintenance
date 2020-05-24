@@ -22,12 +22,6 @@ class CarMaintenanceTesting(unittest.TestCase):
             "year": 1995
         }
 
-        self.modify_car = {
-            "make": "Ford",
-            "model": "Explorer",
-            "year": 1997
-        }
-
         self.new_service = {
             "date": "2020-05-15",
             "mileage": 50000,
