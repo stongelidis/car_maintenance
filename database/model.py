@@ -1,6 +1,7 @@
 import os
 from sqlalchemy import Column, String, Integer, Date
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 import json
 
 # database_path set as environment variable
@@ -12,7 +13,7 @@ def setup_db(app):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
-    db.create_all()
+    migrate = Migrate(app, db)
 
 
 class Car(db.Model):
