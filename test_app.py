@@ -31,7 +31,7 @@ class CarMaintenanceTesting(unittest.TestCase):
         self.new_service = {
             "date": "2020-05-15",
             "mileage": 50000,
-            "service_notes": "replace steering fluid; rotate tires",
+            "notes": "replace steering fluid; rotate tires",
             "car_id": 1
         }
 
@@ -156,3 +156,100 @@ class CarMaintenanceTesting(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertTrue(data['services'])
+
+# -------------------------------------------------------------------------
+    # get a specific service from database
+    def test_specific_service(self):
+        res = self.client().get('/services/1')
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue('service' in data)
+
+    # test specific service, failure
+    def test_specific_service_failure(self):
+        res = self.client().get('/services/1000')
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data['success'], False)
+
+    # -------------------------------------------------------------------------
+    # post in services database
+    def test_service_car(self):
+        res = self.client().post('/services', json=self.new_service)
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue('service' in data)
+
+        # reset database
+        id_car = data['service']['id']
+        self.client().delete('/services/%i' % id_car)
+
+    # test post services, failure
+    def test_post_service_failure(self):
+        res = self.client().post('/services', json={})
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 422)
+        self.assertEqual(data['success'], False)
+
+    # -------------------------------------------------------------------------
+    # delete entry in cars database
+    def test_delete_services(self):
+
+        # add service to be deleted
+        res = self.client().post('/services', json=self.new_service)
+        data = json.loads(res.data)
+        service_id = data['service']['id']
+
+        # test delete endpoint
+        res = self.client().delete('/services/%i' % service_id)
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue('service' in data)
+
+    # test delete car, failure
+    def test_delete_service_failure(self):
+        res = self.client().delete('/services/1001')
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data['success'], False)
+
+    # -------------------------------------------------------------------------
+    # patch services database
+    def test_patch_services(self):
+
+        # add service to be patched
+        res = self.client().post('/services', json=self.new_service)
+        data = json.loads(res.data)
+        service_id = data['service']['id']
+
+        # edit entry
+        data['service']['notes'] = 'replace brake fluid'
+
+        # patch entry
+        res = self.client().patch('/services/%i' % service_id, json=data['service'])
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue('service' in data)
+
+        # reset database
+        id_service = data['service']['id']
+        self.client().delete('/services/%i' % id_service)
+
+    # test patch services, failure
+    def test_patch_services_failure(self):
+        res = self.client().patch('/services/1', json={})
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data['success'], False)

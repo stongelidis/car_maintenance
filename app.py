@@ -160,7 +160,7 @@ def create_app():
 
             service_date = body.get('date')
             service_mileage = body.get('mileage')
-            service_notes = body.get('service_notes')
+            service_notes = body.get('notes')
             car_id = body.get('car_id')
 
             new_service = Service(date=service_date, mileage=service_mileage,
@@ -219,13 +219,12 @@ def create_app():
 
             service_date = body.get('date')
             service_mileage = body.get('mileage')
-            service_notes = body.get('service_notes')
+            service_notes = body.get('notes')
             car_id = body.get('car_id')
 
             service.date = service_date
             service.mileage = service_mileage
             service.notes = service_notes
-            service.car_id = car_id
 
             service.update()
 
