@@ -255,7 +255,7 @@ def create_app():
         }), 422
 
     @app.errorhandler(404)
-    def unprocessable(error):
+    def resource_not_found(error):
         return jsonify({
             "success": False,
             "error": 404,
@@ -263,7 +263,7 @@ def create_app():
         }), 404
 
     @app.errorhandler(403)
-    def unprocessable(error):
+    def user_not_permitted(error):
         return jsonify({
             "success": False,
             "error": 403,
