@@ -16,6 +16,10 @@ class CarMaintenanceTesting(unittest.TestCase):
         self.client = self.app.test_client
         setup_db(self.app)
 
+        admin_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImgzQ0lyeVlIMzlxY24zLXJ1TUc2USJ9.eyJpc3MiOiJodHRwczovL2Rldi11a3Z1MjdubS5hdXRoMC5jb20vIiwic3ViIjoiUDZnNERhTjVTMUtFSkZ1ZkdGQUlHc0pjVHVONzVHOTBAY2xpZW50cyIsImF1ZCI6ImNhcl9tYWludGVuYW5jZSIsImlhdCI6MTU5MDk0MzQzMiwiZXhwIjoxNTkxMDI5ODMyLCJhenAiOiJQNmc0RGFONVMxS0VKRnVmR0ZBSUdzSmNUdU43NUc5MCIsInNjb3BlIjoiZ2V0OmNhcnMgYWRkOmNhcnMgcGF0Y2g6Y2FycyBkZWxldGU6Y2FycyBnZXQ6c2VydmljZXMgYWRkOnNlcnZpY2VzIHBhdGNoOnNlcnZpY2VzIGRlbGV0ZTpzZXJ2aWNlcyIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyIsInBlcm1pc3Npb25zIjpbImdldDpjYXJzIiwiYWRkOmNhcnMiLCJwYXRjaDpjYXJzIiwiZGVsZXRlOmNhcnMiLCJnZXQ6c2VydmljZXMiLCJhZGQ6c2VydmljZXMiLCJwYXRjaDpzZXJ2aWNlcyIsImRlbGV0ZTpzZXJ2aWNlcyJdfQ.WMLaZYcOI0obgiUKiGSx9ZJc83qAZgFOInmKNFd0M6V6XecRg9zdN_sk_Sdmm1GjxbtDJkSnuQHfxpyowPXpuK_q69EC8FVIbu1eZWVeh0671JffkyaV8yrWSYwLQWE13IRJn1WD5yIGNxKZ83xpuTg6nIy91H7psu8jN_kmicLPNkNnuYujIMMgP0ysq3apiVEnoSboBdPc7AdraVQ4c-1JQtyCiqjbWhK6VeCG-ClTltKRpsrqRudNQOWhfMrEkAvsM3rGk5nZgqlgInknEdvqmAmdtUOLazf_J6cWrTjmfWsxl3bHTW_pAMzVkQ8LmTPnLjP814rATe0VS1Yi2w'
+        user_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImgzQ0lyeVlIMzlxY24zLXJ1TUc2USJ9.eyJpc3MiOiJodHRwczovL2Rldi11a3Z1MjdubS5hdXRoMC5jb20vIiwic3ViIjoiUDZnNERhTjVTMUtFSkZ1ZkdGQUlHc0pjVHVONzVHOTBAY2xpZW50cyIsImF1ZCI6ImNhcl9tYWludGVuYW5jZSIsImlhdCI6MTU5MDk2MTUyNSwiZXhwIjoxNTkxMDQ3OTI1LCJhenAiOiJQNmc0RGFONVMxS0VKRnVmR0ZBSUdzSmNUdU43NUc5MCIsInNjb3BlIjoiZ2V0OmNhcnMgYWRkOmNhcnMgZ2V0OnNlcnZpY2VzIGFkZDpzZXJ2aWNlcyIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyIsInBlcm1pc3Npb25zIjpbImdldDpjYXJzIiwiYWRkOmNhcnMiLCJnZXQ6c2VydmljZXMiLCJhZGQ6c2VydmljZXMiXX0.VqVHS25EUpVPa9eZ3eoO9OFYao0HymzM3B_FnOg4roza8zJhbVaKv01VraJJKJVqhaHKsmRRnGAc0wFEw61JNQGAAfnhuFoIaJZq74veRiKvUbNn4QNDOcevTx76SS9WtRTTcMTE57gSN4EzNVuMd6uqGZRFE25SPhhso0-nYAjehfEH-CBsTG9JY-VpRNnv8y4LKKIvNipq7l4woaSI1AYzCa20h_9G2FY4D4IR_uFaE7DkqozWpiIeQsu84GjonUUIoleECEBNB0POp42N0EeyimevbUmi6kKJlLtX-V8b_HTHaaGBVqPnGy5O09L-f9CZKJjQRzYxOLTUwOl7FQ'
+        self.headers = {"Authorization": "Bearer {}".format(admin_token)}
+
         self.new_car = {
             "make": "Ford",
             "model": "Bronco",
@@ -36,7 +40,7 @@ class CarMaintenanceTesting(unittest.TestCase):
     # -------------------------------------------------------------------------
     # test get all cars endpoints
     def test_get_cars(self):
-        res = self.client().get('/cars')
+        res = self.client().get('/cars', headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -46,7 +50,7 @@ class CarMaintenanceTesting(unittest.TestCase):
     # -------------------------------------------------------------------------
     # get a specific car from database
     def test_specific_car(self):
-        res = self.client().get('/cars/2')
+        res = self.client().get('/cars/2', headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -55,7 +59,7 @@ class CarMaintenanceTesting(unittest.TestCase):
 
     # test specific car, failure
     def test_specific_car_failure(self):
-        res = self.client().get('/cars/1000')
+        res = self.client().get('/cars/1000', headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -64,7 +68,7 @@ class CarMaintenanceTesting(unittest.TestCase):
     # -------------------------------------------------------------------------
     # post in cars database
     def test_post_car(self):
-        res = self.client().post('/cars', json=self.new_car)
+        res = self.client().post('/cars', headers=self.headers, json=self.new_car)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -73,11 +77,11 @@ class CarMaintenanceTesting(unittest.TestCase):
 
         # reset database
         id_car = data['car']['id']
-        self.client().delete('/cars/%i' % id_car)
+        self.client().delete('/cars/%i' % id_car, headers=self.headers)
 
     # test post car, failure
     def test_post_car_failure(self):
-        res = self.client().post('/cars', json={})
+        res = self.client().post('/cars', headers=self.headers, json={})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 422)
@@ -88,12 +92,12 @@ class CarMaintenanceTesting(unittest.TestCase):
     def test_delete_car(self):
 
         # add car to be deleted
-        res = self.client().post('/cars', json=self.new_car)
+        res = self.client().post('/cars', headers=self.headers, json=self.new_car)
         data = json.loads(res.data)
         car_id = data['car']['id']
 
         # test delete endpoint
-        res = self.client().delete('/cars/%i' % car_id)
+        res = self.client().delete('/cars/%i' % car_id, headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -102,7 +106,7 @@ class CarMaintenanceTesting(unittest.TestCase):
 
     # test delete car, failure
     def test_delete_car_failure(self):
-        res = self.client().delete('/cars/1001')
+        res = self.client().delete('/cars/1001', headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -113,7 +117,7 @@ class CarMaintenanceTesting(unittest.TestCase):
     def test_patch_car(self):
 
         # add car to be patched
-        res = self.client().post('/cars', json=self.new_car)
+        res = self.client().post('/cars', headers=self.headers, json=self.new_car)
         data = json.loads(res.data)
         car_id = data['car']['id']
 
@@ -121,7 +125,7 @@ class CarMaintenanceTesting(unittest.TestCase):
         data['car']['model'] = 'Fiesta'
 
         # patch entry
-        res = self.client().patch('/cars/%i' % car_id, json=data['car'])
+        res = self.client().patch('/cars/%i' % car_id, headers=self.headers, json=data['car'])
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -130,11 +134,11 @@ class CarMaintenanceTesting(unittest.TestCase):
 
         # reset database
         id_car = data['car']['id']
-        self.client().delete('/cars/%i' % id_car)
+        self.client().delete('/cars/%i' % id_car, headers=self.headers)
 
     # test patch car, failure
     def test_patch_car_failure(self):
-        res = self.client().patch('/cars/1', json={})
+        res = self.client().patch('/cars/1', headers=self.headers, json={})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -144,7 +148,7 @@ class CarMaintenanceTesting(unittest.TestCase):
     # -------------------------------------------------------------------------
     # test get all services endpoint
     def test_get_services(self):
-        res = self.client().get('/services')
+        res = self.client().get('/services', headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -154,7 +158,7 @@ class CarMaintenanceTesting(unittest.TestCase):
 # -------------------------------------------------------------------------
     # get a specific service from database
     def test_specific_service(self):
-        res = self.client().get('/services/1')
+        res = self.client().get('/services/1', headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -163,7 +167,7 @@ class CarMaintenanceTesting(unittest.TestCase):
 
     # test specific service, failure
     def test_specific_service_failure(self):
-        res = self.client().get('/services/1000')
+        res = self.client().get('/services/1000', headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -172,7 +176,7 @@ class CarMaintenanceTesting(unittest.TestCase):
     # -------------------------------------------------------------------------
     # post in services database
     def test_service_car(self):
-        res = self.client().post('/services', json=self.new_service)
+        res = self.client().post('/services', headers=self.headers, json=self.new_service)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -181,11 +185,11 @@ class CarMaintenanceTesting(unittest.TestCase):
 
         # reset database
         id_car = data['service']['id']
-        self.client().delete('/services/%i' % id_car)
+        self.client().delete('/services/%i' % id_car, headers=self.headers)
 
     # test post services, failure
     def test_post_service_failure(self):
-        res = self.client().post('/services', json={})
+        res = self.client().post('/services', headers=self.headers, json={})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 422)
@@ -196,12 +200,12 @@ class CarMaintenanceTesting(unittest.TestCase):
     def test_delete_services(self):
 
         # add service to be deleted
-        res = self.client().post('/services', json=self.new_service)
+        res = self.client().post('/services', headers=self.headers, json=self.new_service)
         data = json.loads(res.data)
         service_id = data['service']['id']
 
         # test delete endpoint
-        res = self.client().delete('/services/%i' % service_id)
+        res = self.client().delete('/services/%i' % service_id, headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -210,7 +214,7 @@ class CarMaintenanceTesting(unittest.TestCase):
 
     # test delete car, failure
     def test_delete_service_failure(self):
-        res = self.client().delete('/services/1001')
+        res = self.client().delete('/services/1001', headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -221,7 +225,7 @@ class CarMaintenanceTesting(unittest.TestCase):
     def test_patch_services(self):
 
         # add service to be patched
-        res = self.client().post('/services', json=self.new_service)
+        res = self.client().post('/services', headers=self.headers, json=self.new_service)
         data = json.loads(res.data)
         service_id = data['service']['id']
 
@@ -229,7 +233,7 @@ class CarMaintenanceTesting(unittest.TestCase):
         data['service']['notes'] = 'replace brake fluid'
 
         # patch entry
-        res = self.client().patch('/services/%i' % service_id, json=data['service'])
+        res = self.client().patch('/services/%i' % service_id, headers=self.headers, json=data['service'])
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -238,11 +242,11 @@ class CarMaintenanceTesting(unittest.TestCase):
 
         # reset database
         id_service = data['service']['id']
-        self.client().delete('/services/%i' % id_service)
+        self.client().delete('/services/%i' % id_service, headers=self.headers)
 
     # test patch services, failure
     def test_patch_services_failure(self):
-        res = self.client().patch('/services/1', json={})
+        res = self.client().patch('/services/1', headers=self.headers, json={})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)

@@ -25,7 +25,8 @@ def create_app():
     # -----------------------------------------------------------------------------
 
     @app.route('/cars', methods=['GET'])
-    def get_cars():
+    @requires_auth('get:cars')
+    def get_cars(permissions):
 
         try:
             selection = Car.query.all()
@@ -40,7 +41,8 @@ def create_app():
             abort(404)
 
     @app.route('/services', methods=['GET'])
-    def get_services():
+    @requires_auth('get:services')
+    def get_services(permissions):
 
         try:
             selection = Service.query.all()
@@ -59,7 +61,8 @@ def create_app():
     # -----------------------------------------------------------------------------
 
     @app.route('/cars/<int:id>', methods=['GET'])
-    def get_specific_car(id):
+    @requires_auth('get:cars')
+    def get_specific_car(permissions, id):
 
         try:
             selection = Car.query.filter(Car.id == id).one_or_none()
@@ -74,7 +77,8 @@ def create_app():
             abort(404)
 
     @app.route('/services/<int:id>', methods=['GET'])
-    def get_specific_service(id):
+    @requires_auth('get:services')
+    def get_specific_service(permissions, id):
 
         try:
             selection = Service.query.filter(Service.id == id).one_or_none()
@@ -93,7 +97,8 @@ def create_app():
     # -----------------------------------------------------------------------------
 
     @app.route('/cars/<int:id>', methods=['DELETE'])
-    def delete_car(id):
+    @requires_auth('delete:cars')
+    def delete_car(permissions, id):
 
         try:
             car = Car.query.get(id)
@@ -108,7 +113,8 @@ def create_app():
             abort(404)
 
     @app.route('/services/<int:id>', methods=['DELETE'])
-    def delete_service(id):
+    @requires_auth('delete:services')
+    def delete_service(permissions, id):
 
         try:
             service = Service.query.get(id)
@@ -127,7 +133,8 @@ def create_app():
     # -----------------------------------------------------------------------------
 
     @app.route('/cars', methods=['POST'])
-    def post_car():
+    @requires_auth('add:cars')
+    def post_car(permissions):
 
         body = request.get_json()
 
@@ -152,7 +159,8 @@ def create_app():
             abort(422)
 
     @app.route('/services', methods=['POST'])
-    def post_services():
+    @requires_auth('add:services')
+    def post_services(permissions):
 
         body = request.get_json()
 
@@ -183,7 +191,8 @@ def create_app():
     # -----------------------------------------------------------------------------
 
     @app.route('/cars/<int:id>', methods=['PATCH'])
-    def patch_car(id):
+    @requires_auth('patch:cars')
+    def patch_car(permissions, id):
 
         try:
 
@@ -210,7 +219,8 @@ def create_app():
             abort(404)
 
     @app.route('/services/<int:id>', methods=['PATCH'])
-    def patch_service(id):
+    @requires_auth('patch:services')
+    def patch_service(permissions, id):
         try:
 
             service = Service.query.filter(Service.id == id).one_or_none()
@@ -237,10 +247,6 @@ def create_app():
             abort(404)
 
     # -----------------------------------------------------------------------------
-
-    @app.route('/')
-    def hello_world():
-        return 'Hello World!'
 
     # -----------------------------------------------------------------------------
     # Error Handlers
