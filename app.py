@@ -61,7 +61,7 @@ def create_app():
     # -----------------------------------------------------------------------------
 
     @app.route('/cars/<int:id>', methods=['GET'])
-    @requires_auth('get:cars')
+    # @requires_auth('get:cars')
     def get_specific_car(permissions, id):
 
         try:
@@ -77,7 +77,7 @@ def create_app():
             abort(404)
 
     @app.route('/services/<int:id>', methods=['GET'])
-    @requires_auth('get:services')
+    # @requires_auth('get:services')
     def get_specific_service(permissions, id):
 
         try:
