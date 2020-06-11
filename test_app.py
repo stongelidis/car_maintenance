@@ -16,8 +16,8 @@ class CarMaintenanceTesting(unittest.TestCase):
         self.client = self.app.test_client
         setup_db(self.app)
 
-        admin_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImgzQ0lyeVlIMzlxY24zLXJ1TUc2USJ9.eyJpc3MiOiJodHRwczovL2Rldi11a3Z1MjdubS5hdXRoMC5jb20vIiwic3ViIjoiUDZnNERhTjVTMUtFSkZ1ZkdGQUlHc0pjVHVONzVHOTBAY2xpZW50cyIsImF1ZCI6ImNhcl9tYWludGVuYW5jZSIsImlhdCI6MTU5MTE0NzM0OCwiZXhwIjoxNTkxMjMzNzQ4LCJhenAiOiJQNmc0RGFONVMxS0VKRnVmR0ZBSUdzSmNUdU43NUc5MCIsInNjb3BlIjoiZ2V0OmNhcnMgYWRkOmNhcnMgcGF0Y2g6Y2FycyBkZWxldGU6Y2FycyBnZXQ6c2VydmljZXMgYWRkOnNlcnZpY2VzIHBhdGNoOnNlcnZpY2VzIGRlbGV0ZTpzZXJ2aWNlcyIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyIsInBlcm1pc3Npb25zIjpbImdldDpjYXJzIiwiYWRkOmNhcnMiLCJwYXRjaDpjYXJzIiwiZGVsZXRlOmNhcnMiLCJnZXQ6c2VydmljZXMiLCJhZGQ6c2VydmljZXMiLCJwYXRjaDpzZXJ2aWNlcyIsImRlbGV0ZTpzZXJ2aWNlcyJdfQ.Q6FeeMoTSngUHU24ammlrluavMJ6NsJXuL3RNnpKlr5H4SHmj6vwMOCpoue9Wk8vuC9H5v5PD6_txZct8MPoCTs-1JzZOjHWgoQZPIEKkLEXfZUUJC_lsobtkGZvK8Rojhg1ZUJTcsfYQ-by28o6i0hnVFJiwfTYZIsfyJhmcxBqtosROqTm1QWjusnokfyb-4by--j0TrfO3DxpdKM9_q-CuZWBauJZyzdfYs5lQkKhwCdkcaKeJS4p4Ua_YkhPrB29xfVovtGa5Avg6Fl-KdzN-KM80LKlvxPFGDfW0vqFBE9-sruZh7HdrXD5MVie9pbvXeX0YUJcoZjPsLFTcQ'
-        user_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImgzQ0lyeVlIMzlxY24zLXJ1TUc2USJ9.eyJpc3MiOiJodHRwczovL2Rldi11a3Z1MjdubS5hdXRoMC5jb20vIiwic3ViIjoiUDZnNERhTjVTMUtFSkZ1ZkdGQUlHc0pjVHVONzVHOTBAY2xpZW50cyIsImF1ZCI6ImNhcl9tYWludGVuYW5jZSIsImlhdCI6MTU5MDk2MTUyNSwiZXhwIjoxNTkxMDQ3OTI1LCJhenAiOiJQNmc0RGFONVMxS0VKRnVmR0ZBSUdzSmNUdU43NUc5MCIsInNjb3BlIjoiZ2V0OmNhcnMgYWRkOmNhcnMgZ2V0OnNlcnZpY2VzIGFkZDpzZXJ2aWNlcyIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyIsInBlcm1pc3Npb25zIjpbImdldDpjYXJzIiwiYWRkOmNhcnMiLCJnZXQ6c2VydmljZXMiLCJhZGQ6c2VydmljZXMiXX0.VqVHS25EUpVPa9eZ3eoO9OFYao0HymzM3B_FnOg4roza8zJhbVaKv01VraJJKJVqhaHKsmRRnGAc0wFEw61JNQGAAfnhuFoIaJZq74veRiKvUbNn4QNDOcevTx76SS9WtRTTcMTE57gSN4EzNVuMd6uqGZRFE25SPhhso0-nYAjehfEH-CBsTG9JY-VpRNnv8y4LKKIvNipq7l4woaSI1AYzCa20h_9G2FY4D4IR_uFaE7DkqozWpiIeQsu84GjonUUIoleECEBNB0POp42N0EeyimevbUmi6kKJlLtX-V8b_HTHaaGBVqPnGy5O09L-f9CZKJjQRzYxOLTUwOl7FQ'
+        admin_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImgzQ0lyeVlIMzlxY24zLXJ1TUc2USJ9.eyJpc3MiOiJodHRwczovL2Rldi11a3Z1MjdubS5hdXRoMC5jb20vIiwic3ViIjoiUDZnNERhTjVTMUtFSkZ1ZkdGQUlHc0pjVHVONzVHOTBAY2xpZW50cyIsImF1ZCI6ImNhcl9tYWludGVuYW5jZSIsImlhdCI6MTU5MTgzNTQyNCwiZXhwIjoxNTkxOTIxODI0LCJhenAiOiJQNmc0RGFONVMxS0VKRnVmR0ZBSUdzSmNUdU43NUc5MCIsInNjb3BlIjoiZ2V0OmNhcnMgYWRkOmNhcnMgcGF0Y2g6Y2FycyBkZWxldGU6Y2FycyBnZXQ6c2VydmljZXMgYWRkOnNlcnZpY2VzIHBhdGNoOnNlcnZpY2VzIGRlbGV0ZTpzZXJ2aWNlcyIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyIsInBlcm1pc3Npb25zIjpbImdldDpjYXJzIiwiYWRkOmNhcnMiLCJwYXRjaDpjYXJzIiwiZGVsZXRlOmNhcnMiLCJnZXQ6c2VydmljZXMiLCJhZGQ6c2VydmljZXMiLCJwYXRjaDpzZXJ2aWNlcyIsImRlbGV0ZTpzZXJ2aWNlcyJdfQ.j8z8smhDLA_5_7t509yKe-MLzSDZDnKlOIr5gUIrp6gaPdUDMpYcqWsdCMLivAbIW2dnvepmGcGTyKlwr8gA3h4WU8V1traxxFHlqXhVc2vpkXb214LbcFI8faYdngFNmrvKyNe2bxhnBLiftMKCjxwZEUGpah8HCkijp17FqItdIIJsAj5KzsTTBTLaPCoMWp4BvgR83b1IyWGbFaMUsKI-_KkFFdGVsP72GMiWjRka5GSnpQoNKU-6RnCjjmT0jQpqNntyIlr5FBLkpk_ZfHtVihfgDXzF2vKgjQb1GeBE5lGOmJPvmuMaI8qPXTj3TVfO7g1PRIgiSYIF-vunQA'
+        user_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImgzQ0lyeVlIMzlxY24zLXJ1TUc2USJ9.eyJpc3MiOiJodHRwczovL2Rldi11a3Z1MjdubS5hdXRoMC5jb20vIiwic3ViIjoiUDZnNERhTjVTMUtFSkZ1ZkdGQUlHc0pjVHVONzVHOTBAY2xpZW50cyIsImF1ZCI6ImNhcl9tYWludGVuYW5jZSIsImlhdCI6MTU5MTgzODMwMiwiZXhwIjoxNTkxOTI0NzAyLCJhenAiOiJQNmc0RGFONVMxS0VKRnVmR0ZBSUdzSmNUdU43NUc5MCIsInNjb3BlIjoiZ2V0OmNhcnMgYWRkOmNhcnMgZ2V0OnNlcnZpY2VzIGFkZDpzZXJ2aWNlcyIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyIsInBlcm1pc3Npb25zIjpbImdldDpjYXJzIiwiYWRkOmNhcnMiLCJnZXQ6c2VydmljZXMiLCJhZGQ6c2VydmljZXMiXX0.BhnMSD2wEHvEVFsQxH2A8kG3ma-Rs-oByuxPFAUejOdXJDz8IkQJFfyr2-uOWKss-Ilh_fJTpHyZHk6fcJOIg01LZG3LYSzRcDGbhgqkPwELVN0LVsyaBZTcmL05sm1HWbnaoL5Az0Y_OSpffx4AP5rNbMLRV9iAvCMxzRUdb3Wf9LH8KY_uSj7b4GoUzNjj16BtQkFEejuANBpiDvSxs0gM4T0cSo_riCE-XuOquewnUI80uUwMfwBofpHl_vjhK3Zk7QSdYO-KK5wzEcs8ijPHwb7DKevtHKI3lDaGt-bcV-OFstv794ZcFPAr_GlejOV9eMdwpHMs2TwW34e4lw'
         self.headers = {"Authorization": "Bearer {}".format(admin_token)}
 
         self.new_car = {
@@ -40,7 +40,7 @@ class CarMaintenanceTesting(unittest.TestCase):
     # -------------------------------------------------------------------------
     # test get all cars endpoints
     def test_get_cars(self):
-        res = self.client().get('/cars', headers=self.headers)
+        res = self.client().get('/cars')
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -148,7 +148,7 @@ class CarMaintenanceTesting(unittest.TestCase):
     # -------------------------------------------------------------------------
     # test get all services endpoint
     def test_get_services(self):
-        res = self.client().get('/services', headers=self.headers)
+        res = self.client().get('/services')
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
