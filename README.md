@@ -68,8 +68,8 @@ The 'admin' role has the following RBAC associated with the user:
 - delete:cars
 - get:services
 - add:services
- - patch:services
- - delete:services
+- patch:services
+- delete:services
 
 ### User
 The 'user' role has the following RBAC associated with it:
@@ -84,4 +84,97 @@ The following token can be used to test the 'user' roles:
 
 ## Endpoints
 ### GET /cars
+- Fetches a list containing all cars within the database
+- Permissions: None
+- Request Arguments: None
+- Returns: An object with a 
+```'
+adfadf 
+```
 
+### GET /cars/<car_id>
+- <INSERT DESCRIPTION
+- Permissions: get:cars
+- Request Arguments: car id 
+- Returns: 
+```'
+adfadf 
+```
+
+### POST /cars/
+- INSERT DESCRIPTION
+- Permissions: post:cars
+- Request Arguments: None
+- Returns: 
+```'
+adfadf 
+```
+
+### PATCH /cars/<car_id>
+- INSERT DESCRIPTION
+- Permissions: patch:cars
+- Request Arguments: None
+- Returns: 
+```'
+adfadf 
+```
+
+### DELETE /cars/<car_id>
+- INSERT DESCRIPTION
+- Permissions: delete:cars
+- Request Arguments: None
+- Returns: 
+```'
+adfadf 
+```
+
+### GET /services
+- Fetches a list containing all services within the database
+- Permissions: None
+- Request Arguments: None
+- Returns: 
+```'
+adfadf 
+```
+
+### GET /services/<service_id>
+- <INSERT DESCRIPTION
+- Permissions: get:services
+- Request Arguments: services id 
+- Returns: 
+```'
+adfadf 
+```
+
+### POST /services/
+- INSERT DESCRIPTION
+- Permissions: post:services
+- Request Arguments: None
+- Returns: 
+```'
+adfadf 
+```
+
+### PATCH /services/<service_id>
+- INSERT DESCRIPTION
+- Permissions: patch:services
+- Request Arguments: None
+- Returns: 
+```'
+adfadf 
+```
+
+### DELETE /services/<service_id>
+- INSERT DESCRIPTION
+- Permissions: delete:services
+- Request Arguments: None
+- Returns: 
+```'
+adfadf 
+```
+
+## Testing
+Unit tests were created using the unittest module. The tests can be run by executing the following command within the source directory:
+```bash
+python3 test_app.py
+```
