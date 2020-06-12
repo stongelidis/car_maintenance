@@ -30,13 +30,13 @@ pip install -r requirements.txt
 
 - [Flask-CORS](https://flask-cors.readthedocs.io/en/latest/#) is the extension we'll use to handle cross origin requests from our frontend server. 
 
-### Database Setup
+#### Database Setup
 With Postgres running, navigate to the source folder and run the following command from the terminal:
 ```bash
 python3 manage.py db upgrade
 ```
 
-### Running the server
+#### Running the server
 
 From within the source directory execute the following to run the server: 
 
@@ -52,7 +52,7 @@ flask run
 Setting the `FLASK_ENV` variable to `development` will detect file changes and restart the server automatically.
 
 ### Interacting with Web API 
-The API is located at the following address: https://car-maintenance-database.herokuapp.com   
+The other option is to work with the web API. The web API is located here: https://car-maintenance-database.herokuapp.com   
 
 ## Roles
 There are two roles associated with the API: admin, user, and all
@@ -62,11 +62,21 @@ No user permissions are needed to get all cars or get all service endpoints
 
 ### Admin
 The 'admin' role has the following RBAC associated with the user:
-get:cars, add:cars, patch:cars, delete:cars, get:services, add:services, patch:services, delete:services
+- get:cars
+- add:cars
+- patch:cars
+- delete:cars
+- get:services
+- add:services
+ - patch:services
+ - delete:services
 
 ### User
 The 'user' role has the following RBAC associated with it:
-get:cars, add:cars, get:services, add:services
+- get:cars 
+- add:cars
+- get:services
+- add:services
 
 ## Tokens
 The following token can be used to test the 'admin' roles:   
