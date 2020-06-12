@@ -84,52 +84,114 @@ The following token can be used to test the 'user' roles:
 
 ## Endpoints
 ### GET /cars
-- Fetches a list containing all cars within the database
+- Gets a descriptive list of all the cars in the database
 - Permissions: None
 - Request Arguments: None
-- Returns: An object with a 
+- Body: None
+- Returns: An object with a list of car objects with the keys shown below
 ```'
-adfadf 
+{
+    "cars": [
+        {
+            "id": 1,
+            "make": "Ford",
+            "model": "Taurus",
+            "year": 1994
+        },
+        {
+            "id": 2,
+            "make": "Honda",
+            "model": "Accord",
+            "year": 2000
+        }
+    ],
+    "success": true
+} 
 ```
 
 ### GET /cars/<car_id>
-- <INSERT DESCRIPTION
+- Gets a specific car within the database with it's attributes
 - Permissions: get:cars
 - Request Arguments: car id 
-- Returns: 
+- Body: None
+- Returns: An object containing a car object
 ```'
-adfadf 
+{
+    "car": {
+        "id": 1,
+        "make": "Ford",
+        "model": "Taurus",
+        "year": 1994
+    },
+    "success": true
+} 
 ```
 
 ### POST /cars/
-- INSERT DESCRIPTION
+- Adds a car to the database
 - Permissions: post:cars
 - Request Arguments: None
-- Returns: 
+- Body: Parameters to define a car
 ```'
-adfadf 
+{
+	"make": "Ford",
+	"model": "Bronco",
+	"year": 1995
+}
+```
+- Returns: An object containing the newly created car object
+```'
+{
+    "car": {
+        "id": 4,
+        "make": "Ford",
+        "model": "Bronco",
+        "year": 1995
+    },
+    "success": true
+} 
 ```
 
 ### PATCH /cars/<car_id>
-- INSERT DESCRIPTION
+- Edits a car from the database
 - Permissions: patch:cars
 - Request Arguments: None
-- Returns: 
+- Body: Parameters to define a car
 ```'
-adfadf 
+{
+    "make": "Honda",
+    "model": "Accord",
+    "year": 2000
+}
+```
+- Returns: An object containing the newly edited car object
+```'
+{
+    "car": {
+        "id": 2,
+        "make": "Honda",
+        "model": "Accord",
+        "year": 2000
+    },
+    "success": true
+} 
 ```
 
 ### DELETE /cars/<car_id>
-- INSERT DESCRIPTION
+- Deletes a car from the database
 - Permissions: delete:cars
 - Request Arguments: None
-- Returns: 
+- Body: None
+- Returns: An object containing the car id that was deleted
 ```'
-adfadf 
+{
+    "car": 2,
+    "success": true
+} 
 ```
 
 ### GET /services
-- Fetches a list containing all services within the database
+- Gets a descriptive list of all services in the database
 - Permissions: None
 - Request Arguments: None
 - Returns: 
@@ -138,7 +200,7 @@ adfadf
 ```
 
 ### GET /services/<service_id>
-- <INSERT DESCRIPTION
+- Get a specific service with all of it's attributes
 - Permissions: get:services
 - Request Arguments: services id 
 - Returns: 
@@ -147,7 +209,7 @@ adfadf
 ```
 
 ### POST /services/
-- INSERT DESCRIPTION
+- Add a new service to the database
 - Permissions: post:services
 - Request Arguments: None
 - Returns: 
@@ -156,7 +218,7 @@ adfadf
 ```
 
 ### PATCH /services/<service_id>
-- INSERT DESCRIPTION
+- Edit a service in the database
 - Permissions: patch:services
 - Request Arguments: None
 - Returns: 
@@ -165,9 +227,9 @@ adfadf
 ```
 
 ### DELETE /services/<service_id>
-- INSERT DESCRIPTION
+- Delete a service in the database
 - Permissions: delete:services
-- Request Arguments: None
+- Request Arguments: service_id
 - Returns: 
 ```'
 adfadf 
