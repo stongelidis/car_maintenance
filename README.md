@@ -2,7 +2,7 @@
 This project is a databasing tool to help keep track of each service performed on a car. Never again wonder when was the last time you serviced your car.
 
 ## Getting Started 
-###Running a Local Copy
+### Running a Local Copy
 
 #### Installing Dependencies
 
