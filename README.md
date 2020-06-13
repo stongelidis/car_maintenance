@@ -194,45 +194,127 @@ The following token can be used to test the 'user' roles:
 - Gets a descriptive list of all services in the database
 - Permissions: None
 - Request Arguments: None
-- Returns: 
+- Body: None
+- Returns: An object with a list of service objects with the keys shown below
 ```'
-adfadf 
+{
+    "services": [
+        {
+            "date": "Wed, 13 May 2020 00:00:00 GMT",
+            "id": 1,
+            "make": "Honda",
+            "mileage": 43000,
+            "model": "Accord",
+            "notes": "oil change, new oil filter, and new brakes"
+        },
+        {
+            "date": "Fri, 15 May 2020 00:00:00 GMT",
+            "id": 2,
+            "make": "Ford",
+            "mileage": 50000,
+            "model": "Taurus",
+            "notes": "replace steering fluid; rotate tires"
+        },
+        {
+            "date": "Fri, 15 May 2020 00:00:00 GMT",
+            "id": 3,
+            "make": "Ford",
+            "mileage": 50000,
+            "model": "Taurus",
+            "notes": "replace steering fluid; rotate tires"
+        }
+    ],
+    "success": true
+} 
 ```
 
 ### GET /services/<service_id>
 - Get a specific service with all of it's attributes
 - Permissions: get:services
 - Request Arguments: services id 
-- Returns: 
+- Body: None
+- Returns: An object containing a service object
 ```'
-adfadf 
+{
+    "service": {
+        "date": "Wed, 13 May 2020 00:00:00 GMT",
+        "id": 1,
+        "make": "Honda",
+        "mileage": 43000,
+        "model": "Accord",
+        "notes": "oil change, new oil filter, and new brakes"
+    },
+    "success": true
+} 
 ```
 
 ### POST /services/
 - Add a new service to the database
 - Permissions: post:services
 - Request Arguments: None
-- Returns: 
+- Body: Parameters to define a service
 ```'
-adfadf 
+{
+	"date": "2020-05-15",
+	"mileage": 50000,
+	"notes": "replace steering fluid; rotate tires",
+	"car_id": 1
+}
+```
+- Returns: An object containing the newly created service object
+```'
+{
+    "service": {
+        "date": "Fri, 15 May 2020 00:00:00 GMT",
+        "id": 3,
+        "make": "Ford",
+        "mileage": 50000,
+        "model": "Taurus",
+        "notes": "replace steering fluid; rotate tires"
+    },
+    "success": true
+} 
 ```
 
 ### PATCH /services/<service_id>
 - Edit a service in the database
 - Permissions: patch:services
 - Request Arguments: None
-- Returns: 
+- Body: Parameters to define a service
 ```'
-adfadf 
+{
+	"date": "2020-05-15",
+	"mileage": 50000,
+	"notes": "replace steering fluid; rotate tires",
+	"car_id": 1
+}
+```
+- Returns: An object containing the newly edited car object
+```'
+{
+    "service": {
+        "date": "Fri, 15 May 2020 00:00:00 GMT",
+        "id": 2,
+        "make": "Ford",
+        "mileage": 50000,
+        "model": "Taurus",
+        "notes": "replace steering fluid; rotate tires"
+    },
+    "success": true
+}
 ```
 
 ### DELETE /services/<service_id>
 - Delete a service in the database
 - Permissions: delete:services
 - Request Arguments: service_id
-- Returns: 
+- Body: None
+- Returns: An object containing the service id that was deleted
 ```'
-adfadf 
+{
+    "service": 3,
+    "success": true
+} 
 ```
 
 ## Testing
