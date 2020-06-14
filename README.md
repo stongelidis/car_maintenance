@@ -79,8 +79,8 @@ The 'user' role has the following RBAC associated with it:
 - add:services
 
 ## Tokens
-The following token can be used to test the 'admin' roles:   
-The following token can be used to test the 'user' roles:   
+The following token can be used to test the 'admin' roles: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImgzQ0lyeVlIMzlxY24zLXJ1TUc2USJ9.eyJpc3MiOiJodHRwczovL2Rldi11a3Z1MjdubS5hdXRoMC5jb20vIiwic3ViIjoiUDZnNERhTjVTMUtFSkZ1ZkdGQUlHc0pjVHVONzVHOTBAY2xpZW50cyIsImF1ZCI6ImNhcl9tYWludGVuYW5jZSIsImlhdCI6MTU5MjA5OTk5OSwiZXhwIjoxNTkyMTg2Mzk5LCJhenAiOiJQNmc0RGFONVMxS0VKRnVmR0ZBSUdzSmNUdU43NUc5MCIsInNjb3BlIjoiZ2V0OmNhcnMgYWRkOmNhcnMgcGF0Y2g6Y2FycyBkZWxldGU6Y2FycyBnZXQ6c2VydmljZXMgYWRkOnNlcnZpY2VzIHBhdGNoOnNlcnZpY2VzIGRlbGV0ZTpzZXJ2aWNlcyIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyIsInBlcm1pc3Npb25zIjpbImdldDpjYXJzIiwiYWRkOmNhcnMiLCJwYXRjaDpjYXJzIiwiZGVsZXRlOmNhcnMiLCJnZXQ6c2VydmljZXMiLCJhZGQ6c2VydmljZXMiLCJwYXRjaDpzZXJ2aWNlcyIsImRlbGV0ZTpzZXJ2aWNlcyJdfQ.oNl0Veb9sxP8LtM6T4deY6_tzGYzxVO2dg__S5in5Nmqyu5ePoxsmr0PJzFhq4zg5DS_gQb501R1lui30S8wQVwxWar0apbF78tmo155Xoq4YsblaLkdnQoNrtlmG4Xjfo5LLstHy5q9GQqMQNYQYbvzplEmO5NFkOsZsKtCSEqlIvn03Cc2OHV7sfoDB_616k8CN5qZuZtBloOqGkgkPfBaMc3e9btNGsfEMEpVq0m43dsFeGoUKBbH8wuqIq808BULbAIuhS-5f7fZaec57dPZD3S_AL7Z9PzdggsIj6VybNX0rpXvh1a09YSEcxfd-dF5ZdPQfgu7fOeaN0HzWA   
+The following token can be used to test the 'user' roles: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImgzQ0lyeVlIMzlxY24zLXJ1TUc2USJ9.eyJpc3MiOiJodHRwczovL2Rldi11a3Z1MjdubS5hdXRoMC5jb20vIiwic3ViIjoiUDZnNERhTjVTMUtFSkZ1ZkdGQUlHc0pjVHVONzVHOTBAY2xpZW50cyIsImF1ZCI6ImNhcl9tYWludGVuYW5jZSIsImlhdCI6MTU5MjEwMDE0NiwiZXhwIjoxNTkyMTg2NTQ2LCJhenAiOiJQNmc0RGFONVMxS0VKRnVmR0ZBSUdzSmNUdU43NUc5MCIsInNjb3BlIjoiZ2V0OmNhcnMgYWRkOmNhcnMgZ2V0OnNlcnZpY2VzIGFkZDpzZXJ2aWNlcyIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyIsInBlcm1pc3Npb25zIjpbImdldDpjYXJzIiwiYWRkOmNhcnMiLCJnZXQ6c2VydmljZXMiLCJhZGQ6c2VydmljZXMiXX0.edD1FjF6uGz4fXdQl6wxXCR8-9mVT_xUi7OTCtzUqu7X0od_6k1rqy_Zq6fbmcRR60lRjIpEbVJ_NbfLERLCVgL-ZZH1_73RKrWWaid2mjQBJ5kduwNIQ4-lk5Lf_gBMqaHKiqGNx-647_SIGmdBf2Tyfbui36_Z-m_m_b6RY5Ed3X06lru-CvlwjIVjP7uKjuwW7dqCGLSZjcDkYRnWmuhThH9paLyjkrJyvs4ONYCklhIP1D1DAdz2RYvUV-9kBDh1m60_XN4_g8V9KxtxnEDnriFy3sDH1J8a3Go1u_ur_lZH3bqSC-Rj-5dEMeTNpn74Nkvie1Wk9jImc1dVsg   
 
 ## Endpoints
 ### GET /cars
@@ -89,7 +89,7 @@ The following token can be used to test the 'user' roles:
 - Request Arguments: None
 - Body: None
 - Returns: An object with a list of car objects with the keys shown below
-```'
+```
 {
     "cars": [
         {
@@ -115,7 +115,7 @@ The following token can be used to test the 'user' roles:
 - Request Arguments: car id 
 - Body: None
 - Returns: An object containing a car object
-```'
+```
 {
     "car": {
         "id": 1,
@@ -132,7 +132,7 @@ The following token can be used to test the 'user' roles:
 - Permissions: post:cars
 - Request Arguments: None
 - Body: Parameters to define a car
-```'
+```
 {
 	"make": "Ford",
 	"model": "Bronco",
@@ -140,7 +140,7 @@ The following token can be used to test the 'user' roles:
 }
 ```
 - Returns: An object containing the newly created car object
-```'
+```
 {
     "car": {
         "id": 4,
@@ -157,7 +157,7 @@ The following token can be used to test the 'user' roles:
 - Permissions: patch:cars
 - Request Arguments: None
 - Body: Parameters to define a car
-```'
+```
 {
     "make": "Honda",
     "model": "Accord",
@@ -165,7 +165,7 @@ The following token can be used to test the 'user' roles:
 }
 ```
 - Returns: An object containing the newly edited car object
-```'
+```
 {
     "car": {
         "id": 2,
@@ -183,7 +183,7 @@ The following token can be used to test the 'user' roles:
 - Request Arguments: None
 - Body: None
 - Returns: An object containing the car id that was deleted
-```'
+```
 {
     "car": 2,
     "success": true
@@ -196,7 +196,7 @@ The following token can be used to test the 'user' roles:
 - Request Arguments: None
 - Body: None
 - Returns: An object with a list of service objects with the keys shown below
-```'
+```
 {
     "services": [
         {
@@ -234,7 +234,7 @@ The following token can be used to test the 'user' roles:
 - Request Arguments: services id 
 - Body: None
 - Returns: An object containing a service object
-```'
+```
 {
     "service": {
         "date": "Wed, 13 May 2020 00:00:00 GMT",
@@ -253,7 +253,7 @@ The following token can be used to test the 'user' roles:
 - Permissions: post:services
 - Request Arguments: None
 - Body: Parameters to define a service
-```'
+```
 {
 	"date": "2020-05-15",
 	"mileage": 50000,
@@ -262,7 +262,7 @@ The following token can be used to test the 'user' roles:
 }
 ```
 - Returns: An object containing the newly created service object
-```'
+```
 {
     "service": {
         "date": "Fri, 15 May 2020 00:00:00 GMT",
@@ -281,7 +281,7 @@ The following token can be used to test the 'user' roles:
 - Permissions: patch:services
 - Request Arguments: None
 - Body: Parameters to define a service
-```'
+```
 {
 	"date": "2020-05-15",
 	"mileage": 50000,
@@ -290,7 +290,7 @@ The following token can be used to test the 'user' roles:
 }
 ```
 - Returns: An object containing the newly edited car object
-```'
+```
 {
     "service": {
         "date": "Fri, 15 May 2020 00:00:00 GMT",
@@ -310,7 +310,7 @@ The following token can be used to test the 'user' roles:
 - Request Arguments: service_id
 - Body: None
 - Returns: An object containing the service id that was deleted
-```'
+```
 {
     "service": 3,
     "success": true
